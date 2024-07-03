@@ -110,6 +110,7 @@ export default class CameraView extends Component<CameraProps> {
   static defaultProps: CameraProps = {
     zoom: 0,
     facing: 'back',
+    type: 'back',
     enableTorch: false,
     mode: 'picture',
     flash: 'off',
@@ -226,23 +227,23 @@ export default class CameraView extends Component<CameraProps> {
 
   _onObjectDetected =
     (callback?: Function) =>
-    ({ nativeEvent }: { nativeEvent: any }) => {
-      const { type } = nativeEvent;
-      if (
-        this._lastEvents[type] &&
-        this._lastEventsTimes[type] &&
-        JSON.stringify(nativeEvent) === this._lastEvents[type] &&
-        new Date().getTime() - this._lastEventsTimes[type].getTime() < EventThrottleMs
-      ) {
-        return;
-      }
+      ({ nativeEvent }: { nativeEvent: any }) => {
+        const { type } = nativeEvent;
+        if (
+          this._lastEvents[type] &&
+          this._lastEventsTimes[type] &&
+          JSON.stringify(nativeEvent) === this._lastEvents[type] &&
+          new Date().getTime() - this._lastEventsTimes[type].getTime() < EventThrottleMs
+        ) {
+          return;
+        }
 
-      if (callback) {
-        callback(nativeEvent);
-        this._lastEventsTimes[type] = new Date();
-        this._lastEvents[type] = JSON.stringify(nativeEvent);
-      }
-    };
+        if (callback) {
+          callback(nativeEvent);
+          this._lastEventsTimes[type] = new Date();
+          this._lastEvents[type] = JSON.stringify(nativeEvent);
+        }
+      };
 
   _setReference = (ref: Ref<CameraViewRef>) => {
     if (ref) {

@@ -295,6 +295,7 @@ export type CameraProps = ViewProps & {
    * @default 'back'
    */
   facing?: CameraType;
+  type?: CameraType;
   /**
    * Camera flash mode. Use one of `FlashMode` values. When `on`, the flash on your device will
    * turn on when taking a picture. When `off`, it won't. Setting it to `auto` will fire flash if required.
@@ -427,6 +428,7 @@ export type CameraNativeProps = {
   onPictureSaved?: PictureSavedListener;
   onResponsiveOrientationChanged?: ResponsiveOrientationChangedListener;
   facing?: string;
+  type?: string;
   flashMode?: string;
   enableTorch?: boolean;
   animateShutter?: boolean;
